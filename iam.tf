@@ -8,6 +8,8 @@ resource "aws_iam_role_policy_attachment" "policy" {
   count      = length(local.computed_roles_policies)
   role       = local.computed_roles_policies[count.index].role
   policy_arn = local.computed_roles_policies[count.index].policy_arn
+
+  depends_on = [aws_iam_role.role]
 }
 
 data "aws_iam_policy_document" "trust_relationship" {
